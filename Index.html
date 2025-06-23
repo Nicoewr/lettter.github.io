@@ -26,8 +26,9 @@
       border-radius: 8px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       display: flex;
+      flex-direction: column;
       justify-content: center;
-      align-items: flex-end;
+      align-items: center;
       padding-bottom: 1rem;
     }
 
@@ -45,7 +46,7 @@
     }
 
     .open-btn {
-      margin-bottom: 20px;
+      margin-top: 60px;
       padding: 0.5rem 1.5rem;
       background: #ff4d6d;
       color: white;
@@ -69,7 +70,9 @@
       animation: fadeIn 1s ease forwards;
       position: absolute;
       z-index: 1;
-      top: 60px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
     .letter h1 {
@@ -91,8 +94,8 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
     }
 
     @keyframes pulse {
@@ -108,7 +111,7 @@
 </head>
 <body>
 
-  <div class="envelope">
+  <div class="envelope" id="envelope">
     <div class="flap" id="flap"></div>
     <button class="open-btn" id="openBtn" onclick="openLetter()">Open Letter 💌</button>
     <div class="letter" id="letter">
@@ -118,7 +121,7 @@
         Every moment with you feels like magic, and I'm endlessly grateful to have you by my side.
       </p>
       <p>
-        You deserve to know, every single day: <strong>I love you</strong> — deeply, truly, and endlessly.
+        You deserve to know, every single day: <strong>I love you</strong> deeply, truly, and endlessly.
       </p>
       <div class="heart">❤️</div>
     </div>
@@ -129,11 +132,16 @@
       const flap = document.getElementById("flap");
       const letter = document.getElementById("letter");
       const openBtn = document.getElementById("openBtn");
+      const envelope = document.getElementById("envelope");
+
       flap.classList.add("open");
       openBtn.style.display = "none";
 
       setTimeout(() => {
         letter.style.display = "flex";
+        envelope.style.display = "none";
+        document.body.appendChild(letter); // Move letter to body center
+        letter.style.zIndex = "10";
       }, 1000);
     }
   </script>
